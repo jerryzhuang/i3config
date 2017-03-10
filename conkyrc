@@ -11,15 +11,16 @@ cpu_avg_samples 2
 
 TEXT
 [
-{ "full_text" : "  ${exec uname -r}" , "color": "\#66CCFF"},
-{ "full_text" : " ${exec curl icanhazip.com}"},
+{ "full_text" : "  Kernel::${exec uname -r}" , "color": "\#66CCFF"},
+{ "full_text" : " IP:${exec curl icanhazip.com}"},
 { "full_text" : ${if_up ens32}"  ${upspeed ens32}/s  ${downspeed ens32}/s"${else}""${endif}, "color" : "\#94F397" },
 { "full_text" : ${if_up wls33}"  ${upspeed wls33}/s  ${downspeed wls33}/s"${else}""${endif}, "color" : "\#94F397" },
-{ "full_text" : " ${cpu cpu0}%" , "color" : "\#8BC3E7" },
-{ "full_text" : " ${mem}" , "color" : "\#B987D9" },
+{ "full_text" : " CPU:${cpu cpu0}%" , "color" : "\#8BC3E7" },
+{ "full_text" : " Mem:${mem}" , "color" : "\#B987D9" },
 #{ "full_text" : " ${fs_used_perc /}%" , "color" : "\#FF9D17" },
-{ "full_text" : "${execi 1 amixer | grep -A10 'Master' | sed -rn 's/.*\[([0-9]+%)\].*\[(on|off)\]/\2 \1/p' | sed -n '1p' | sed 's/off.*/ /' | sed -r 's/on( [01234]?[0-9]%)/\1/' | sed -r 's/(on|) 0%/ 0%/' | sed -r 's/on//'}" , "color" : "\#D9D919" },
-{ "full_text" : " ${exec cat /proc/uptime| awk -F. '{run_days=$1 / 86400;run_hour=($1 % 86400)/3600;run_minute=($1 % 3600)/60;run_second=$1 % 60;printf("%dd %dh %dm",run_days,run_hour,run_minute,run_second)}'}" , "color" : "\#FF6666" },
+{ "full_text" : "${execi 1 amixer | grep -A10 'Master' | sed -rn 's/.*\[([0-9]+%)\].*\[(on|off)\]/\2 \1/p' | sed -n '1p' | sed 's/off.*/ /' | sed -r 's/on( [01234]?[0-9]%)/ Volume:\1/' | sed -r 's/(on|)  0%/ Volume: 0%/' | sed -r 's/on/ Volume:/'}" , "color" : "\#D9D919" },
+{ "full_text" : " Uptime:${exec cat /proc/uptime| awk -F. '{run_days=$1 / 86400;run_hour=($1 % 86400)/3600;run_minute=($1 % 3600)/60;run_second=$1 % 60;printf("%dd %dh %dm",run_days,run_hour,run_minute,run_second)}'}" , "color" : "\#cc1122" },
 #{ "full_text" : " ${battery_percent}%" , "color" : "\#A4DC6A" },
-{ "full_text" : " ${time %Y/%m/%d %a %H:%M}" , "color" : "\#ff797b" }
+{ "full_text" : " Time:${time %Y年%m月%d日 %a %H:%M}" , "color" : "\#ff797b" },
+{ "full_text" : " User : ${exec echo $LOGNAME}" , "color" : "\#ff00ff" }
 ],
