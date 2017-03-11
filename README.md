@@ -1,2 +1,2 @@
 # i3config
-need:compton i3-gaps ibus urxvt
+need:compton i3-gaps ibus urxvt dmenu
